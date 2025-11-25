@@ -80,3 +80,20 @@ def solution(num_list):
     
     # mul이 (리스트 합의 제곱)보다 작으면 True(1), 아니면 False(0)
     return int(mul < sum(num_list) ** 2)
+
+
+
+# [이어 붙인 수]
+
+def solution(num_list):
+    odd_str = ""   # 홀수만 이어 붙일 문자열
+    even_str = ""  # 짝수만 이어 붙일 문자열
+
+    for n in num_list:
+        if n % 2 == 1:       # n이 홀수라면
+            odd_str += str(n)   # 문자열로 바꿔 이어 붙인다
+        else:                # n이 짝수라면
+            even_str += str(n)  # 문자열로 바꿔 이어 붙인다
+
+    # 문자열을 정수로 변환해서 더해 결과 반환
+    return int(odd_str) + int(even_str)
