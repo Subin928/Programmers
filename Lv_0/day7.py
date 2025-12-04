@@ -1,4 +1,4 @@
-# 20251203
+# 20251203 20251204
 
 # [수열과 구간 쿼리 4]
 
@@ -16,6 +16,7 @@ def solution(arr, queries):
             if i % k == 0:       # i가 k의 배수인지 확인
                 arr[i] += 1      # 조건 만족하면 1 증가
     return arr
+
 
 
 # [배열 만들기2]
@@ -52,3 +53,52 @@ def solution(l, r):
 print(solution(5, 555))  # [5, 50, 55, 500, 505, 550, 555]
 print(solution(10, 20))  # [-1] (0과 5로만 이루어진 숫자 없음)
 print(solution(1, 10))   # [5] (5만 해당)
+
+
+
+# [카운트 업]
+
+# 문제 이해
+# start_num부터 end_num까지의 연속된 정수를 리스트로 반환
+
+# 방법 1. range 사용
+
+def solution(start_num, end_num):
+    return list(range(start_num, end_num+1))
+
+# 방법 2. 리스트 컴프리헨션
+
+def solution(start_num, end_num):
+    return [i for i in range(start_num, end_num+1)]
+
+# 방법 3. for 루프
+
+def solution(start_num, end_num):
+    result = []
+    for i in range(start_num, end_num+1):
+        result.append(i)
+    return result
+
+
+
+# [콜라츠 수열 만들기]
+
+# 문제 이해
+# 콜라츠 수열 규칙:
+# x가 짝수 -> x / 2
+# x가 홀수 -> 3 * x + 1
+# x가 1이 될 때까지 반복
+# 거쳐간 모든 수를 기록
+
+def solution(n):
+    result = [n]              # 첫 번째 값부터 기록
+
+    while n != 1:             # 1이 될 때까지 반복
+        if n % 2 == 0:        # 짝수인 경우
+            n = n // 2        # 2로 나누기
+        else:                 # 홀수인 경우
+            n = 3 * n + 1     # 3배 + 1
+
+        result.append(n)      # 계산 결과 추가
+    
+    return result
