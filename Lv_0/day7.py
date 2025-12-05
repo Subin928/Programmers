@@ -102,3 +102,49 @@ def solution(n):
         result.append(n)      # 계산 결과 추가
     
     return result
+
+
+
+# [배열 만들기 4]
+
+# 문제 이해
+# 규칙:
+# 1. stk가 비어있으면 -> arr[i] 추가, i += 1
+# 2. stk[-1] < arr[i]이면 -> arr[i] 추가, i += 1
+# 3. stk[-1] >= arr[i]이면 -> stk[-1] 제거 (i는 그대로!)
+# 핵심: 3번 조건에서 i를 증가시키지 않음
+
+def solution(arr):
+    stk = []                                  # 빈 배열로 시작
+    i = 0                                     # 인덱스 초기값
+
+    while i < len(arr):                       # arr 끝까지 반복
+        # 1. stk가 비어있으면
+        if not stk:
+            stk.append(arr[i])                # 현재 값 추가
+            i += 1                            # 다음으로 이동
+        
+        # 2. stk의 마지막 원소 < arr[i]
+        elif stk[-1] < arr[i]:                # 마지막 값 < 현재 값
+            stk.append(arr[i])                # 현재 값 추가
+            i += 1                            # 다음으로 이동
+        
+        # 3. stk의 마지막 원소 >= arr[i]
+        else:                                 # 마지막 값 >= 현재 값
+            stk.pop()                         # 마지막 값 제거
+                                              # i는 그대로! (중요)
+    return stk
+
+# (간결한 버전)
+
+def solution(arr):
+    stk = []
+    i = 0
+
+    while i < len(arr):
+        if stk and stk[-1] >= arr[i]:
+            stk.pop()
+        else:
+            stk.append(arr[i])
+            i += 1
+    return stk
