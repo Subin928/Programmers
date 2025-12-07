@@ -70,6 +70,101 @@ p = [num for num, cnt in count.items() if cnt == 3][0]
 print(p) # 3
 
 
+# <counter 없이 풀이>
+
+def solution(a, b, c, d):
+    dice = [a, b, c, d]
+
+    # 각 숫자의 등장 획수를 딕셔너리로 세기
+    count_dict = {}
+    for num in dice:
+        if num in count_dict:
+            count_dict[num] += 1
+        else:
+            count_dict[num] = 1
+
+    # 등장 횟수만 추출해서 정렬
+    counts = sorted(count_dict.values(), reverse = True)
+
+    # 1. 네 주사위 모두 같음 (4개)
+    if counts == [4]:
+        return 1111 * a
+    
+    # 2. 세 주사위 같음 (3개, 1개)
+    elif counts == [3, 1]:
+        p = [num for num, cnt in count_dict.items() if cnt == 3][0]
+        q = [num for num, cnt in count_dict.items() if cnt == 1][0]
+
+    # 3. 두 개씩 같음  (2개, 2개)
+    elif counts == [2, 2]:
+        nums = [num for num, cnt in count_dict.items() if cnt == 2]
+        p, q = nums[0], nums[1]
+        return (p + q) * abs(p - q)
+    
+    # 4. 두 주사위만 같음 (2개, 1개, 1개)
+    elif counts == [2, 1, 1]:
+        p = [num for num, cnt in count_dict.items() if cnt == 2][0]
+        others = [num for num, cnt in count_dict.items() if cnt == 1]
+        q, r = others[0], others[1]
+        return q * r
+    
+    # 5. 모두 다름 (1개, 1개, 1개, 1개)
+    else:
+        return min(dice)
+
+
+# <sorted 활용 풀이>
+
+def solution(a, b, c, d):
+    dice = sorted([a, b, c, d])
+
+    # 1. 모두 같음
+    if dice[0] == dice[3]:
+        return 1111 * dice[0]
+    
+    # 2. 3개 같음
+    elif dice[0] == dice[2]: # [p, p, p, q]
+        return (10 * dice[0] + dice[3]) ** 2
+    elif dice[1] == dice[3]: # [q, p, p, p]
+        return (10 * dice[1] + dice[0]) ** 2
+    
+    # 3. 2개씩 같음
+    elif dice[0] == dice[1] and dice[2] == dice[3]:  # [p, p, q, q]
+        return(dice[0] + dice[2])
+    
+    # 4. 2개만 같음
+    elif dice[0] == dice[1]:         # [p, p, q, r]
+        return dice[2] * dice[3]
+    elif dice[1] == dice[2]:         # [q, p, p, r]
+        return dice[0] * dice[3]
+    elif dice[2] == dice[3]:         # [q, r, p, p]
+        return dice[0] * dice[1]
+    
+    # 5. 모두 다름
+    else:
+        return dice[0]
+    
+
+
+# <프로그래머스 정답>
+
+
+def solution(a, b, c, d):
+    l = [a,b,c,d]
+    c = [l.count(x) for x in l]
+    if max(c) == 4:
+        return 1111*a
+    elif max(c) == 3:
+        return (10*l[c.index(3)]+l[c.index(1)])**2
+    elif max(c) == 2:
+        if min(c) == 1:
+            return eval('*'.join([str(l[i]) for i, x in enumerate(c) if x == 1]))
+        else:
+            return (max(l) + min(l)) * abs(max(l) - min(l))
+    else:
+        return min(l)
+
+
 
 # [글자 이어 붙여 문자열 만들기]
 
