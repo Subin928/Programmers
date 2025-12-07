@@ -102,12 +102,12 @@ def solution(my_string, index_list):
 my_string = "hello"
 index_list = [1, 4, 0, 0, 3]
 
-# 1단계
-# my_string[1] = 'e'
-# my_string[4] = 'o'
-# my_string[0] = 'h'
-# my_string[0] = 'h'
-# my_string[3] = 'l'
+
+my_string[3] = 'l'# 1단계
+my_string[1] = 'e'
+my_string[4] = 'o'
+my_string[0] = 'h'
+my_string[0] = 'h'
 
 # 2단계 : 리스트로 만들기
 chars = ['e', 'o', 'h', 'h', 'l']
