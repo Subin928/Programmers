@@ -130,3 +130,15 @@ def solution(arr, query):
         else:
             arr = arr[q:]
     return arr
+
+
+
+# [n개 간격의 원소들]
+
+# 설명
+# num_list[start:end:step]
+#   - start부터 end-1까지 step간격으로
+#   - 처음부터 끝까지 n간격이므로 -> [::n]
+
+def solution(num_list, n):
+    return num_list[::n]
